@@ -1,33 +1,40 @@
 #include <stdio.h>
-
 /**
- * main - Function
- *
- * Return: Always 0.
+ * main - main block
+ * Description: Print all possible different combinations of 3 digits.
+ * Numbers must be separated by commas and a space.
+ * The 3 digits must be different.
+ * 012, 120, 102, 021, 201, 210 are considered the same combination.
+ * print only the smallest combination of 3 digits.
+ * Numbers should be printed in ascending order.
+ * You can only use `putchar` to print to console.
+ * You can only use `putchar` up to 6 times.
+ * You are not allowed to use any variables of type `char`.
+ * Return: 0
  */
 int main(void)
 {
-	int d1, d2, d3
+	int a, b, c, d;
 
-	for (d1 = 0; d1 < 8; d1++)
+	for (a = 0; a < 1000; a++)
 	{
-		for (d2 = d1 + 1; d2 < 9; d2++)
+		b = a / 100; /* hundreds */
+		c = (a / 10) % 10; /* tens */
+		d = a % 10; /* singles */
+
+		if (b < c && c < d)
 		{
-			for (d3 = d2 + 1; d3 < 10; d3++)
+			putchar(b + '0');
+			putchar(c + '0');
+			putchar(d + '0');
+
+			if (a < 700)
 			{
-				putchar((d1 % 10) + '0');
-				putchar((d2 % 10) + '0');
-				putchar((d3 % 10) + '0');
-
-				if (d1 == 7 && d2 == 8 && d3 == 9)
-					continue;
-
 				putchar(',');
 				putchar(' ');
 			}
 		}
 	}
-
 	putchar('\n');
 
 	return (0);
