@@ -1,6 +1,6 @@
 /*
  * File: 9-print_comb.c
- * Auth: Clement Ogol
+ * Auth: Clement Ogol 
  */
 
 #include <stdio.h>
