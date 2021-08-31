@@ -10,16 +10,16 @@
 
 int main(void)
 {
-	_putchar('H');
-	_putchar('o');
-	_putchar('l');
-	_putchar('b');
-	_putchar('e');
-	_putchar('r');
-	_putchar('t');
-	_putchar('o');
-	_putchar('n');
-	_putchar('\n');
+	char h[] = "Holberton";
+	int m;
 
+	m = 0;
+
+	while (m <= 8)
+	{
+		_putchar(h[m]);
+		m++;
+	}
+	_putchar('\n');
 	return (0);
 }
