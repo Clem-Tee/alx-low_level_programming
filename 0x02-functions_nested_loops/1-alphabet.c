@@ -1,4 +1,4 @@
-#include "notrebloh.h"
+#include "main.h"
 
 /**
  * print_alphabet - use only defined variables to create output
