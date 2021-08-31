@@ -6,15 +6,15 @@
  */
 int main(void)
 {
-	char holberton[] = "Holberton";
-	int i = 0;
-
-	while (holberton[i] != '\0')
-	{
-		_putchar(holberton[i]);
-		i++;
-	}
-	_putchar('\n');
+	putchar('_');
+	putchar('p');
+	putchar('u');
+	putchar('t');
+	putchar('c');
+	putchar('h');
+	putchar('a');
+	putchar('r');
+	putchar('\n');
 
 	return (0);
 }
