@@ -1,4 +1,5 @@
 #include "notrebloh.h"
+#include "main.h"
 
 /**
  * main - Entry Point.use only defined variable to create output.
