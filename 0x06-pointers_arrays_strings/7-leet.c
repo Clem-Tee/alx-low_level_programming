@@ -1,4 +1,4 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * leet - encode
@@ -10,15 +10,15 @@ char *leet(char *s)
 {
 	int i;
 	int j;
-	char l[] = "ol_ea_t";
+	char l[] = "ol_ea__t";
 
 	for (i = 0; s[i] != '\0'; i++)
 	{
 		for (j = 0; l[j] != '\0'; j++)
 		{
-			if (s[i] == l[j] || s[j] == (l[j] - 32))
+			if (s[i] == l[j] || s[i] == (l[j] - 32))
 			{
-				s[i] = j + 'o';
+				s[i] = j + '0';
 			}
 		}
 	}
