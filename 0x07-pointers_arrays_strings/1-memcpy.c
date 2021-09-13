@@ -8,14 +8,11 @@
  *
  * Return: pointer to destination buffer
  */
-
-char *_memory(char *dest, char *src, unsigned int n)
+char *_memcpy(char *dest, char *src, unsigned int n)
 {
-	unsigned int i;
-
-	for (i = 0; i < n; i++)
+	while (n--)
 	{
-		dest[i] = src[i];
+		*(dest + n) = *(src + n);
 	}
 	return (dest);
 }
