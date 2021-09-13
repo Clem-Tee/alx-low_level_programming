@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stdio.h>
+#include <stddef.h>
 
 /**
  * _strchr - locates char in string
@@ -8,19 +8,30 @@
  *
  * Return: pointer to first occurence of c in s
  */
-char *_strpbrk(char *s, char *accept)
+char *_strchr(char *s, char c)
 {
-	int i;
-
 	while (*s)
 	{
-		for (i = 0; accept[i]; i++)
-		{
-			if (*s == accept[i])
-			{
-				return (s);
-			}
-		}
+		if (*s == c)
+			return (s);
+		s++;
+	}
+	return (NULL);
+}
+
+/**
+ * _strpbrk - searches string for any of a set of bytes
+ * @s: string to search
+ * @accept: set of bytes to find
+ *
+ * Return: pointer to first matching byte or NULL
+ */
+char *_strpbrk(char *s, char *accept)
+{
+	while (*s)
+	{
+		if (_strchr(accept, *s))
+			return (s);
 		s++;
 	}
 	return (NULL);
