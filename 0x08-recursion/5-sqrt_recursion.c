@@ -1,31 +1,28 @@
 #include "main.h"
 
 /**
- * do_sqrt_recursion - needs the extra parameter r to work
- * @n: the natural number whose root to find
- * @r: the root iterator
- *
- * Return: the natural root of n or -1 if not found
- */
-int do_sqrt_recursion(int n, int r)
-{
-	if (r * r == n)
-		return;
-	else if (r * r > n)
-		return (-1);
-	return (do_sqrt_recursion(n, r + 1));
-}
-
-/**
- * _sqrt_recursion - returns the square root of x
- * @n: the number to root
- *
- * Rethe integer result, -1 on error
+ * _sqrt_recursion - main funct
+ * @n: int n
+ * Return: int
  */
 int _sqrt_recursion(int n)
 {
+	return (_sqrt(n, 1));
+}
+
+/**
+ * _sqrt - _sqrt_recursion
+ * @n: integer paramtr
+ * @i: integer parameter
+ * Return: sqrt
+ */
+int _sqrt(int n, int i)
+{
 	if (n < 0)
 		return (-1);
-
-	return (do_sqrt_recursion(n, 0));
+	if ((i * i) > n)
+		return (-1);
+	if (i * i == n)
+		return (i);
+	return (_sqrt(n, i + 1));
 }
