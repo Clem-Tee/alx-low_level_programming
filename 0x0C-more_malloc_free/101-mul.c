@@ -2,87 +2,154 @@
 #include <stdlib.h>
 #include "main.h"
 
-int _putchar(char c);
-
 /**
  * main - Entry point
- * @argc: The number of command line arguments
- * @argv: An array containing the command line arguments
+ * @argc: Number of arguments
+ * @argv: Array of arguments
  *
  * Return: 0 on success, 98 on failure
  */
 int main(int argc, char *argv[])
 {
-	int i, j, len1, len2, sum, carry;
-	int *result;
+    char *num1, *num2;
 
-	if (argc != 3)
-	{
-		printf("Error\n");
-		exit(98);
-	}
+    if (argc != 3)
+    {
+        printf("Error\n");
+        exit(98);
+    }
 
-	len1 = 0;
-	while (argv[1][len1] != '\0')
-	{
-		if (argv[1][len1] < '0' || argv[1][len1] > '9')
-		{
-			printf("Error\n");
-			exit(98);
-		}
-		len1++;
-	}
+    if (!onlyNumbers(argv[1]) || !onlyNumbers(argv[2]))
+    {
+        printf("Error\n");
+        exit(98);
+    }
 
-	len2 = 0;
-	while (argv[2][len2] != '\0')
-	{
-		if (argv[2][len2] < '0' || argv[2][len2] > '9')
-		{
-			printf("Error\n");
-			exit(98);
-		}
-		len2++;
-	}
+    num1 = argv[1];
+    num2 = argv[2];
 
-	result = calloc(len1 + len2, sizeof(int));
-	if (result == NULL)
-	{
-		printf("Error\n");
-		exit(98);
-	}
+    multiply(num1, num2);
 
-	for (i = len1 - 1; i >= 0; i--)
-	{
-		carry = 0;
-		for (j = len2 - 1; j >= 0; j--)
-		{
-			sum = (argv[1][i] - '0') * (argv[2][j] - '0') + result[i + j + 1] + carry;
-			carry = sum / 10;
-			result[i + j + 1] = sum % 10;
-		}
-		result[i] += carry;
-	}
-
-	i = 0;
-	while (result[i] == 0 && i < len1 + len2 - 1)
-		i++;
-
-	for (; i < len1 + len2; i++)
-		_putchar(result[i] + '0');
-	_putchar('\n');
-
-	free(result);
-	return (0);
+    return 0;
 }
 
 /**
- * _putchar - Writes the character c to stdout
- * @c: The character to print
+ * onlyNumbers - Checks if a string contains only digits
+ * @c: The string to be checked
  *
- * Return: On success 1, on error, -1 is returned
+ * Return: 1 if string contains only digits, 0 otherwise
+ */
+int onlyNumbers(char *c)
+{
+    int i;
+
+    for (i = 0; c[i] != '\0'; i++)
+    {
+        if (c[i] < '0' || c[i] > '9')
+            return 0;
+    }
+
+    return 1;
+}
+
+/**
+ * multiply - Multiplies two positive numbers
+ * @s1: First number as a string
+ * @s2: Second number as a string
+ */
+void multiply(char *s1, char *s2)
+{
+    int len1, len2, total_len, i, j, carry, n1, n2, sum;
+    int *result;
+
+    len1 = _strlen(s1);
+    len2 = _strlen(s2);
+    total_len = len1 + len2;
+
+    result = _calloc(total_len, sizeof(int));
+    if (result == NULL)
+    {
+        printf("Error\n");
+        exit(98);
+    }
+
+    for (i = len1 - 1; i >= 0; i--)
+    {
+        carry = 0;
+        n1 = s1[i] - '0';
+
+        for (j = len2 - 1; j >= 0; j--)
+        {
+            n2 = s2[j] - '0';
+
+            sum = carry + result[i + j + 1] + (n1 * n2);
+            carry = sum / 10;
+            result[i + j + 1] = sum % 10;
+        }
+
+        if (carry > 0)
+            result[i + j + 1] += carry;
+    }
+
+    for (i = 0; i < total_len; i++)
+        _putchar(result[i] + '0');
+    _putchar('\n');
+
+    free(result);
+}
+
+/**
+ * _strlen - Computes the length of a string
+ * @s: The string to be measured
+ *
+ * Return: The length of the string
+ */
+int _strlen(char *s)
+{
+    int len = 0;
+
+    while (*s)
+    {
+        len++;
+        s++;
+    }
+
+    return len;
+}
+
+/**
+ * _calloc - Allocates memory for an array using malloc and initializes it to 0
+ * @nmemb: Number of elements in the array
+ * @size: Size of each element
+ *
+ * Return: Pointer to the allocated memory
+ */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+    unsigned int i;
+    char *ptr;
+
+    if (nmemb == 0 || size == 0)
+        return NULL;
+
+    ptr = malloc(nmemb * size);
+    if (ptr == NULL)
+        return NULL;
+
+    for (i = 0; i < nmemb * size; i++)
+        ptr[i] = 0;
+
+    return ptr;
+}
+
+/**
+ * _putchar - Writes a character to stdout
+ * @c: The character to be written
+ *
+ * Return: On success, the character written. On error, -1 is returned.
  */
 int _putchar(char c)
 {
-	return (write(1, &c, 1));
+    return putchar(c);
 }
 
